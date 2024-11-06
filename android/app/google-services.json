@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "227753372479",
+    "project_id": "graovac-turist-app",
+    "storage_bucket": "graovac-turist-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:227753372479:android:1d77575c1e0a998b47818a",
+        "android_client_info": {
+          "package_name": "com.example.niamu_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQWUFB7sKvZALvKRRMS_hKhetNgboIr6I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
