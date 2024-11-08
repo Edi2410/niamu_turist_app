@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:niamu_project/feature/common/presentation/screen/empty_screen.dart';
 import 'package:niamu_project/feature/common/presentation/screen/error_screen.dart';
 import 'package:niamu_project/feature/common/presentation/screen/loading_screen.dart';
 import 'package:niamu_project/feature/common/presentation/widget/custom_app_bar.dart';
 import 'package:niamu_project/feature/places/presentation/controller/state/favorite_place_state.dart';
+import 'package:niamu_project/feature/places/presentation/controller/state/place_state.dart';
 import 'package:niamu_project/feature/places/presentation/widget/places_card_widget.dart';
 
 import '../../../../core/di.dart';
@@ -13,12 +15,12 @@ class FavoritePageScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final allPlaces = ref.watch(placesNotifierProvider.notifier).places;
+    final allPlaces = ref.watch(placesNotifierProvider);
     final favoritePlacesState = ref.watch(favoritePlacesNotifiesProvider);
     return switch (favoritePlacesState) {
       LoadingFavoritePlaces() => const LoadingScreen(),
       ErrorFavoritePlaces() => const ErrorScreen(),
-      EmptyFavoritePlaces() => const ErrorScreen(),
+      EmptyFavoritePlaces() => const EmptyScreen(),
       SuccessFavoritePLaces() => Scaffold(
           appBar: const CustomAppBar(title: "Places"),
           body: Padding(
@@ -26,9 +28,11 @@ class FavoritePageScreen extends ConsumerWidget {
             child: ListView.builder(
               itemCount: favoritePlacesState.favoritePlaces.length,
               itemBuilder: (context, index) {
-                final place = allPlaces?.firstWhere((element) =>
-                    element.id ==
-                    favoritePlacesState.favoritePlaces[index].placesId);
+                final place = allPlaces is SuccessPlaces
+                    ? allPlaces.places.firstWhere((element) =>
+                        element.id ==
+                        favoritePlacesState.favoritePlaces[index].placesId)
+                    : null;
                 return Column(
                   children: [
                     place != null

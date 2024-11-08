@@ -7,14 +7,13 @@ import 'package:niamu_project/feature/places/presentation/controller/state/place
 
 class PlacesNotifier extends Notifier<PlacesState> {
   late final PlacesUseCase _placesUseCase;
-  late List<Place>? places;
+  List<Place>? places;
   late Place? place;
 
   @override
   PlacesState build() {
     _placesUseCase = ref.read(placesUseCasesProvider);
     getAllPlaces();
-
     return const LoadingPlaces();
   }
 

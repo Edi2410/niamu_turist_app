@@ -4,6 +4,7 @@ import 'package:niamu_project/core/di.dart';
 import 'package:niamu_project/feature/common/presentation/screen/error_screen.dart';
 import 'package:niamu_project/feature/common/presentation/widget/custom_app_bar.dart';
 import 'package:niamu_project/feature/common/presentation/screen/loading_screen.dart';
+import 'package:niamu_project/feature/places/presentation/controller/state/favorite_place_state.dart';
 import 'package:niamu_project/feature/places/presentation/controller/state/place_state.dart';
 import 'package:niamu_project/feature/places/presentation/widget/places_card_widget.dart';
 
@@ -13,7 +14,7 @@ class PlacesPageScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final placesState = ref.watch(placesNotifierProvider);
-    final favoritePlaces = ref.watch(favoritePlacesNotifiesProvider.notifier).favoritePlaces;
+    final favoritePlacesState = ref.watch(favoritePlacesNotifiesProvider);
     return switch (placesState) {
       LoadingPlaces() => const LoadingScreen(),
       ErrorPlaces() => const ErrorScreen(),
@@ -28,8 +29,13 @@ class PlacesPageScreen extends ConsumerWidget {
                 final place = placesState.places[index];
                 return Column(
                   children: [
-                    PlacesCard(place: place, isFavorite: favoritePlaces.any(
-                            (element) => element.placesId == place.id)),
+                    PlacesCard(
+                      place: place,
+                      isFavorite: favoritePlacesState is SuccessFavoritePLaces
+                          ? favoritePlacesState.favoritePlaces
+                              .any((element) => element.placesId == place.id)
+                          : false,
+                    ),
                     if (index != placesState.places.length - 1)
                       const SizedBox(height: 10),
                   ],
