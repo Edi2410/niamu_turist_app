@@ -1,106 +1,57 @@
+# Project for Flutter course - Tourist App
 
-To generate translation files, in terminal run: `flutter gen-l10n --arb-dir assets/l10n`
+First flutter project - Tourist App.
 
-To generate api client (retrofit), in terminal run: `flutter pub run build_runner build`
+TouristApp is a mobile application designed to help users discover and save their favorite sights. The app is developed in Flutter, supporting both Android and iOS platforms. It features a user-friendly interface that allows users to browse sights and manage favorites. The backend communicates with a REST API for data fetching. The app also stores some information locally for offline access.
 
-To generate json serializers, in terminal run:`dart run build_runner build`
+## Features
 
-Technical Application Specification
-1. Project Overview
-The mobile application is a tourist guide app where users can discover and save their favorite sights. The application will support both Android and iOS platforms, developed in Flutter, with a backend built using Kotlin Spring. The app will interact with a REST API for fetching data and will store some information locally. Key features include user authentication, sight browsing, favorite sight management, and settings customization.
- 
-2. Core Functionalities
+- **User Authentication**: Users can register, log in, and manage their profile.
+- **Sight Browsing**: Users can browse and explore various tourist sights.
+- **Favorites Management**: Users can save and manage their favorite sights.
 
- 2.1 User Authentication
- •	Splash Screen:
- o	Purpose: Loads initial user data (e.g., authentication status).
- o	Behaviors:
- 	Checks if the user is authenticated.
- 	Redirects either to the Home Screen (if authenticated) or Sign In Screen (if not authenticated).
- •	Sign In Screen:
- o	Purpose: Authenticates the user with email and password.
- o	Input Fields:
- 	Email (validated for correct format).
- 	Password (validated for complexity, e.g., min 8 characters, includes letters and numbers).
- o	Actions:
- 	Sign In button: Authenticates via REST API.
- 	Redirect to Sign Up Screen on user interaction.
- •	Sign Up Screen:
- o	Purpose: Allows users to register a new account.
- o	Input Fields:
- 	Email (validated for correct format).
- 	Password (validated for complexity).
- 	Confirm password (same validation rule, do passwords match)
- o	Actions:
- 	Sign Up button: Registers the user via REST API.
- 	Redirect to Home screen after successful registration.
-   
-2.2 Home Screen
-•	Bottom Navigation Bar:
-o	Contains 3 tabs:
-	Sights (default).
-	Favorites.
-	Settings.
+## Technology Stack
 
- 2.2.1 Sights Tab
- •	API Integration:
- o	Fetches a list of sights from the REST API.
- •	States:
- o	Loading: Shows a loading spinner while the API is fetching data.
- o	Empty: Displays a message when there are no sights available.
- o	Error: Displays an error message if the API call fails.
- o	Filled: Displays a list of sight cards when the API successfully returns data.
- •	Sight Cards:
- o	Information: Each card displays sight name, image, address, rating and a favorite state as heart button icon.
- o	Actions:
- 	Favorite Button: Tapping the heart icon marks/unmarks the sight as a favorite.
- 	Card Tap: Redirects to Sight Details Screen.
- 
- 2.2.2 Sight Details Screen
- Displays: Detailed information about the selected sight (name, image, description).
- •	Actions:
- o	Favorite Button: Allows marking/unmarking the sight as a favorite.
- o	Open in Maps: A button at the bottom of the screen that opens the sight's location in the device's default map app (Google Maps for Android, Apple Maps for iOS).
- 
- 2.2.3 Favorites Tab
- •	Local Storage Integration:
- o	The list of favorite sights is stored locally.
- o	Displays the same sight cards as in the Sights Tab.
- •	States:
- o	Loading: Shows while fetching favorite sights from local storage.
- o	Success: Displays a list of favorited sights.
- o	Empty: Displays a message when no sights are marked as favorites.
- 
- 2.2.4 Settings Tab
- •	User Information:
- o	Displays the currently logged-in user’s email address.
- •	Actions:
- o	Sign Out: Logs the user out and redirects to the Sign In screen.
-  
+- **Flutter**: Used for the development of the mobile app, providing support for both Android and iOS platforms.
+- **REST API**: Used for communication between the app and the backend, fetching sight data and interacting with the server.
+- **Hive Database**: For local storage to cache data such as user preferences and favorite sights.
+- **Firebase**: Integrated for user authentication.
+- **Retrofit/Dio**: Used for handling asynchronous network requests.
 
+## Functionalities
 
-3. Backend Integration
-•	Authentication:
-o	The app will use the backend API (Firebase Auth) for authentication (sign-in, sign-up).
-•	Sights API:
-o	The app will fetch the list of sights via the REST API (Kotlin Spring).
-•	Favorites Management:
-o	The app will manage favoriting/unfavoriting via local storage.
+### Platform Specifics
 
- 
-4. Non-Functional Requirements
-•	Platform Compatibility:
-o	The app must work on both Android (min SDK 21) and iOS (min version 12.0).
-•	Performance:
-o	The app should have smooth navigation and loading indicators for API responses.
-•	Offline Access:
-o	The favorite sights list should be available even when the user is offline, using local storage.
+- The app is designed to take advantage of platform-specific features, such as device hardware management permissions (e.g., location and notifications), and implementing native widgets (Material for Android, Cupertino for iOS).
 
- 
-5. Design & UX
-•	Design Files:
-o	All screens will follow the provided design in Figma, ensuring consistent UI/UX.
-•	Responsiveness:
-o	The app must handle different screen sizes across devices.
- 
+### Architecture
+
+- The app follows **Clean Architecture** (separating concerns into data, domain, and presentation layers) to maintain code scalability and testability.
+- Advanced mobile app architecture principles were considered during the development, ensuring that the app is easy to maintain and extend in the future.
+
+### User Experience
+
+- **Animations**: Custom animations were created to enhance user experience, including smooth screen transitions using Flutter's Hero animation and animated button presses.
+- **Graphical Interface**: Advanced GUI elements were developed, such as custom widgets and complex UI elements that react to user interactions, like form validation.
+
+### Data and Asynchronous Communication
+
+- The app leverages asynchronous communication with external services using Retrofit/Dio for networking, ensuring a smooth experience while waiting for tasks to complete.
+- The **Hive database** is used for local storage of favorite items and user settings, with advanced object-relational mapping to handle data relationships efficiently.
+
+### Email Verification and Password Reset
+
+- **Email Verification**: Upon registration, users will receive a verification email to confirm their account.
+- **Password Reset**: Users can reset their password by receiving a reset link via email, ensuring a secure and convenient recovery process.
+
+### Permissions and Notifications
+
+- The app requests necessary device permissions (location, notifications, etc.) via the Android Manifest and iOS Info.plist files to ensure proper functionality on each platform.
+
+## Installation
+
+### Prerequisites
+
+- Flutter SDK installed.
+- Android Studio or Xcode for building the app on Android or iOS respectively.
 
