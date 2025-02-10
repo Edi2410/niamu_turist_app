@@ -1,6 +1,6 @@
 # Project for Flutter course - Tourist App
 
-First flutter project - Tourist App.
+ Tourist App.
 
 TouristApp is a mobile application designed to help users discover and save their favorite sights. The app is developed in Flutter, supporting both Android and iOS platforms. It features a user-friendly interface that allows users to browse sights and manage favorites. The backend communicates with a REST API for data fetching. The app also stores some information locally for offline access.
 
